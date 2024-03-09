@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 # Load data
-df = pd.read_csv('../data/customer_support_tickets.csv')
+df = pd.read_csv('./data/customer_support_tickets.csv')
 
 # Generate conversation experience score
 df['Conversation Experience Score'] = np.random.randint(1, 100, len(df))
@@ -47,3 +47,5 @@ df['Ticket Channel'] = np.random.choice(ticket_channels, len(df))
 # Response types
 response_types = ['internal note', 'live response']
 df['Response Types'] = np.random.choice(response_types, len(df))
+
+df.to_csv('./data/complete_customer_support_tickets.csv', index=False)

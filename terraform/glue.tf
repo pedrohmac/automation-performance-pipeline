@@ -7,7 +7,7 @@ resource "aws_glue_job" "etl_job" {
   role_arn = aws_iam_role.glue_role.arn
   
   command {
-    script_location = "s3://automation-performance-dev-0-siena/scripts/etl.py"
+    script_location = "s3://${var.bucket}/scripts/etl.py"
     python_version  = "3"
   }
 }

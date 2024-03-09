@@ -12,6 +12,6 @@ resource "aws_s3_bucket_acl" "aws_s3_bucket_acl" {
 }
 
 resource "aws_s3_bucket" "automation_performance_bucket" {
-    bucket          = "automation-performance-dev-0-siena"
+    bucket          = var.bucket
     force_destroy   = true
 }

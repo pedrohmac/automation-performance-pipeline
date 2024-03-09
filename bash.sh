@@ -1,1 +1,11 @@
-aws s3 cp ./scripts s3://automation-performance-dev-0-siena/scripts --recursive
+echo "Generating data"
+
+python3 ./scripts/generate_data_source.py 
+
+echo "Uploading source data to S3"
+
+aws s3 cp ./data/complete_customer_support_tickets.csv s3://$BUCKET/data/
+
+echo "Uploading scripts to S3"
+
+aws s3 cp ./scripts/etl.py s3://$BUCKET/scripts
