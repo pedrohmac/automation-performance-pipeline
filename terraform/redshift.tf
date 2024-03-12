@@ -15,4 +15,5 @@ resource "aws_redshift_cluster" "automation_performance_cluster" {
   number_of_nodes    = 1
   master_username    = local.db_credentials.username
   master_password    = local.db_credentials.password
+  skip_final_snapshot = true
 }
