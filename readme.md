@@ -30,11 +30,11 @@ The architecture of the Automation Performance Dashboard project involves the fo
 - **Preset.io**: Data visualization tool.
 
 ### Pipeline Architecture
-![Architecture diagram]('diagrams/architecture_diagram.png')
+![Architecture diagram](diagrams/architecture_diagram.png)
 
 
 ### Data Warehouse Design
-![Database diagram]('diagrams/data_warehouse.png')
+![Database diagram](diagrams/data_warehouse.png)
 
 ## Prerequisites
 
