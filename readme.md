@@ -6,13 +6,14 @@ Welcome to the Automation Performance Dashboard project! This project aims to pr
 
 1. [Introduction](#introduction)
 2. [Architecture Overview](#architecture-overview)
-3. [Prerequisites](#prerequisites)
-4. [Getting Started](#getting-started)
-5. [Project Structure](#project-structure)
-6. [Deployment](#deployment)
-7. [Usage](#usage)
-8. [Contributing](#contributing)
-9. [License](#license)
+3. [Pipeline Architecture](#pipeline-architecture)
+4. [Data Warehouse Design](#data-warehouse-design)
+5. [Prerequisites](#prerequisites)
+6. [Getting Started](#getting-started)
+7. [Project Structure](#project-structure)
+8. [Deployment](#deployment)
+9. [Usage](#usage)
+10. [License](#license)
 
 ## Introduction
 
@@ -21,12 +22,19 @@ This project implements a data pipeline to automate the extraction, transformati
 ## Architecture Overview
 
 The architecture of the Automation Performance Dashboard project involves the following components:
-
-- **AWS Glue**: Handles data cataloging, ETL processes, and job orchestration.
+- **AWS API Gateway**: Receives .csv files and puts then in S3.
 - **Amazon S3**: Stores raw and processed data files.
+- **AWS Lambda**: Receives trigger from objects uploaded into S3 .
+- **AWS Glue**: Handles data cataloging, ETL processes, and job orchestration.
 - **Amazon Redshift**: Acts as the data warehouse for storing transformed data.
+- **Preset.io**: Data visualization tool.
 
-For a detailed overview of the architecture, refer to the [Architecture and System Design](#architecture-and-system-design) section of the project documentation.
+### Pipeline Architecture
+![Architecture diagram]('diagrams/architecture_diagram.png')
+
+
+### Data Warehouse Design
+![Database diagram]('diagrams/data_warehouse.png')
 
 ## Prerequisites
 
@@ -49,23 +57,30 @@ To get started with the project, follow these steps:
 5. Deploy the infrastructure using Terraform.
 6. Run the ETL processes using AWS Glue or custom scripts.
 
+For detailed instructions, refer to the [Setup Instructions](setup_instructions.md) and [Deployment Guide](#deployment).
 
 ## Project Structure
 
 The project directory structure is organized as follows:
 ```
-bash
 
-/automation-performance-dashboard
+/automation-performance-pipeline
+    /data
+        # Raw dataset, completed dataset, and scripts to explore and generate values required
     /terraform
         # Terraform configuration files for infrastructure setup
-    /scripts
-        /etl
-            # Custom ETL scripts for data processing
+    /services
+        /glue
+            # Custom ETL script for data processing
+        /lambda
+            # Lambda script and package for deployment
+        /redshift
+            # SQL script to create database schema
     /docs
         README.md              # Project documentation
         setup_instructions.md  # Setup and run instructions
         presentation.pdf      # Project presentation slides
+
 
 ```
 
@@ -73,20 +88,22 @@ bash
 
 To deploy the project infrastructure, follow these steps:
 
-1. Navigate to the `/terraform` directory.
-2. Initialize Terraform with `terraform init`.
-3. Review the Terraform execution plan with `terraform plan`.
-4. Apply the changes to create the infrastructure with `terraform apply`.
-5. Monitor the deployment progress and confirm any prompts.
+1. Create an environment variable called ```BUCKET``` with the bucket name you want to use for your project.
+2. Navigate to the `/terraform` directory.
+3. Initialize Terraform with `terraform init`.
+4. Review the Terraform execution plan with `terraform plan`.
+5. Apply the changes to create the infrastructure with `terraform apply`.
+6. Monitor the deployment progress and confirm any prompts.
 
 
 ## Usage
 
-Once the infrastructure is deployed, you can start using the Automation Performance Dashboard:
+Once the infrastructure is deployed, you can start using the Automation Performance Pipeline:
 
-1. Run the ETL processes to extract, transform, and load data into Amazon Redshift.
-2. Configure Redshift connection to your data vizualization tool.
-3. Access the dashboards to visualize automation performance metrics.
+1. Run ```sh bash.sh``` to upload required files 
+2. Run the ETL processes to extract, transform, and load data into Amazon Redshift.
+3. Configure Redshift connection to your data vizualization tool.
+4. Access the dashboards to visualize automation performance metrics.
 
 
 ## License

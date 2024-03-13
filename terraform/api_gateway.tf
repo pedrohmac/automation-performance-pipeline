@@ -26,7 +26,7 @@ resource "aws_api_gateway_integration" "csv_lambda_integration" {
   http_method             = aws_api_gateway_method.csv_method.http_method
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
-  uri                     = aws_lambda_function.glue_trigger.invoke_arn
+  uri                     = aws_lambda_function.csv_api.invoke_arn
 }
 
 # Deploy the API
