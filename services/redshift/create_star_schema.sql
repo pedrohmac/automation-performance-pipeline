@@ -95,6 +95,7 @@ CREATE TABLE support_data.fact_support_tickets (
     auto_qa_results_id INT REFERENCES support_data.dim_ticket_subject(auto_qa_results_id),
     integration_type_used_id INT REFERENCES support_data.dim_integration_type_used(integration_type_used_id),
     action_taken_id INT REFERENCES support_data.dim_action_taken(action_taken_id),
+    action_result_id INT REFERENCES support_data.dim_action_result(action_result_id),
     knowledge_source_id INT REFERENCES support_data.dim_knowledge_source(knowledge_source_id),
     response_types_id INT REFERENCES support_data.dim_response_types(response_types_id),
     ticket_priority_id INT REFERENCES support_data.dim_ticket_priority(ticket_priority_id),

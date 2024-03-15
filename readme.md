@@ -76,6 +76,8 @@ The project directory structure is organized as follows:
             # Lambda script and package for deployment
         /redshift
             # SQL script to create database schema
+        /preset
+            # SQL scripts to create datasets in preset.io
     /docs
         README.md              # Project documentation
         setup_instructions.md  # Setup and run instructions

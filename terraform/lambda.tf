@@ -50,29 +50,31 @@ resource "aws_iam_policy" "api_s3_policy" {
   description = "A test policy"
 
 
-      policy = <<EOF
-   {
-"Version": "2012-10-17",
-"Statement": [
-    {
-        "Effect": "Allow",
-        "Action": [
-            "logs:*"
-        ],
-        "Resource": "arn:aws:logs:*:*:*"
-    },
-    {
-        "Effect": "Allow",
-        "Action": [
-            "s3:*"
-        ],
-        "Resource": "arn:aws:s3:::*"
-    }
-]
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "logs:*"
+        ]
+        Effect = "Allow"
+        Resource = [
+            "arn:aws:logs:*:*:*"
+        ]
+      },
+      {
+        Action = [
+          "s3:*"
+        ]
+        Effect = "Allow"
+        Resource = [
+          "arn:aws:s3:::*"
+        ]
+      }
+    ]
+  })
+}
 
-} 
-    EOF
-    }
 
 # Attach policy to the IAM role
 resource "aws_iam_role_policy_attachment" "api_s3_attach" {
